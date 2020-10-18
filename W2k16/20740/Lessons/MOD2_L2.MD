@@ -40,3 +40,19 @@ list volume
 select volume <X>
 delete volume - 
 ```
+
+Работа с VHD дисками
+```
+• New-VHD. New-VHD -Path c:\sales.vhd -Dynamic -SizeBytes 10Gb 
+• Mount-VHD. Use this command to mount the VHD to create volumes and format files systems. 
+• Initialize-disk. Use this command to initialize the disk in preparation for creating volumes. 
+• Get-vhd. Use this command to retrieve information about a named .vhd file. 
+• Set-vhd. Use this cmdlet to configure the .vhd file properties. For example, the following cmdlet 
+changes the physical sector size of the Sales.vhdx file. 
+Set-VHD –Path c:\Sales.vhdx –PhysicalSectorSizeBytes 4096 
+• Convert-vhd. You can use the Convert-vhd cmdlet to change from a VHD to a VHDX file format.
+
+New-VHD -Path G:\sales1.vhd -Dynamic -SizeBytes 10Gb | Mount-VHD -Passthru |Initialize-Disk -
+Passthru |New-Partition -AssignDriveLetter -UseMaximumSize |Format-Volume -FileSystem NTFS -
+Confirm:$false -Force 
+```
