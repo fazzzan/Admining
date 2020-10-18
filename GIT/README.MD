@@ -81,3 +81,10 @@ To https://github.com/fazzzan/Admining
    a0809ad..ef9d00c  master -> master
 
 ```
+
+10. Если что-то добавляли через WEB-морду, то это что-то закачиваем в локалный репозиторий:
+```
+Fedor@DESKTOP-1C3288U MINGW64 /e/Study/GIT/DarkMycal (master)
+$ git pull
+Already up to date.
+```
