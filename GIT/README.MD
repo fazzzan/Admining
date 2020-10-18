@@ -87,4 +87,13 @@ Fedor@DESKTOP-1C3288U MINGW64 /e/Study/GIT/DarkMycal (master)
 $ git pull
 Already up to date.
 ```
-11. из репозитория в репозиторий прыгаем командой CD, затем git init, затем git status
+11. из репозитория в репозиторий прыгаем командой 
+```
+cd ..
+cd <XYZ>
+git init
+git status
+git add . 
+git commit
+git push
+```
