@@ -23,3 +23,9 @@ Get-VMProcessor -VMName 20740B-LON-SVR1 | fl
 
 после этого удалось создать VHD файл
 ![](Lessons/pictures/M2_l2_3.jpg)
+
+Чтобы отключить 
+ - снимаем галку Hyper-V в фичах Windows 
+ - “bcdedit /enum {current}”
+ - смотрим состояние hypervisorlaunchtype
+ - “bcdedit /set hypervisorlaunchtype off” - отключаем и перезагружаем Windows.
