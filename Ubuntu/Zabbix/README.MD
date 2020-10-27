@@ -29,7 +29,6 @@ fedor@s-admin:/etc/netplan$
 
 ```
 # This is the network config written by 'subiquity'
-# This is the network config written by 'subiquity'
 network:
   ethernets:
     ens33:
@@ -38,13 +37,18 @@ network:
       - 192.168.163.140/24
       gateway4: 192.168.163.2
       nameservers:
-        addresses:
-        - 8.8.8.8
+        addresses: [8.8.8.8, 127.0.0.1]
     ens34:
-       dhcp4: true
+#       dhcp4: true
+      addresses:
+      - 192.168.48.182/24
+      gateway4: 192.168.48.2
+      nameservers:
+        addresses: [127.0.0.1]
+        search: [labs]
 
   version: 2
-  version: 2
+
 ```
 Проверка
 ```

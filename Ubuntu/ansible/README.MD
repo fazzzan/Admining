@@ -99,7 +99,32 @@ all:
 ```
 6. Также проверяем работу DNS/hosts 
 ```
-sudo vi /etc/hosts
+sudo apt-get install libnss-mdns
+cat /etc/nsswitch.conf
+cat /etc/hostname
+```hostname --fqdn ``` - Выводится полное доменное имя ```s-mon.labs```
+```
+sudo hostnamectl set-hostname s-mon.labs
+
+- hostnamectl status
+fedor@s-mon:/etc/ansible/L7$ hostnamectl status
+   Static hostname: s-mon.labs
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: 8388313f51944cf692e0359af6f14bb3
+           Boot ID: d781a640eb0e4f9f8b70de862763c585
+    Virtualization: vmware
+  Operating System: Ubuntu 20.04.1 LTS
+            Kernel: Linux 5.4.0-52-generic
+      Architecture: x86-64
+	  
+- dnsdomainname
+fedor@s-mon:/etc/ansible/L7$ dnsdomainname
+labs
+
+
+sudoedit /etc/hosts
+192.168.48.182 s-mon.labs
 192.168.48.201 SW1
 192.168.48.202 SW2
 192.168.48.203 SW3
