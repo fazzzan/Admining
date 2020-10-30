@@ -1,20 +1,26 @@
-#КАК  ЖЕ МЕНЯ БЕСИТ ЭТОТ GIT
+# КАК  ЖЕ МЕНЯ БЕСИТ ЭТОТ GIT
 
 Итак, в двух словах для WIN:
-1. Надо установить клиент git: обязательно потребуется консольный клиент, доступный по ссылке http://git-scm.com/downloads
-2. Надо иметь регистрацию на https://github.com/
+
+1. Надо установить клиент git: обязательно потребуется консольный клиент, доступный по ссылке <http://git-scm.com/downloads>
+2. Надо иметь регистрацию на <https://github.com/>
 3. Открываем консольный клиент.
 4. Переходим в каталог, где у нас будут лежать все репозитарии, в моем случае E:\Study\GIT\Admining
+
 ```
  cd /e/Study/GIT/Admining/
 ```
+
 5. Делаем странное телодвижение, которое говорит что в каталоге Admining будет лежать репозиторий Admining... Тут я жестко обманулся, надо было делать 
 cd /e/Study/GIT/
+
 ```
 $ git init
 Initialized empty Git repository in E:/Study/GIT/Admining/.git/
 ```
+
 6. Копируем в каталог все г..., что налабали в https
+
 ```
  $ git clone https://github.com/fazzzan/Admining
 Cloning into 'Admining'...
@@ -31,6 +37,7 @@ git config --global user.email "fzakharov@mail.ru"
 git config --global user.name "fazzzan"
 ```
 8. Если добавляем каталог в корень репозитория, то проверяем статус, добавляем каталог в трекинг и делаем commit:
+
 ```
 $ git status
 On branch master
@@ -81,12 +88,15 @@ To https://github.com/fazzzan/Admining
    a0809ad..ef9d00c  master -> master
 
 ```
+
 10. Если что-то добавляли через WEB-морду, то это что-то закачиваем в локалный репозиторий:
+
 ```
 Fedor@DESKTOP-1C3288U MINGW64 /e/Study/GIT/DarkMycal (master)
 $ git pull
 Already up to date.
 ```
+
 11. из репозитория в репозиторий прыгаем командой 
 ```
 cd ..
