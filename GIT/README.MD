@@ -28,7 +28,7 @@ remote: Enumerating objects: 141, done.
 remote: Counting objects: 100% (141/141), done.
 remote: Compressing objects: 100% (121/121), done.
 remote: Total 141 (delta 24), reused 0 (delta 0), pack-reused 0
-Receiving objects: 100% (141/141), 386.69 KiB | 801.00 KiB/s, done.
+Receiving objects: 100% (141/141), 386.git fetch origin master69 KiB | 801.00 KiB/s, done.
 Resolving deltas: 100% (24/24), done.
 ```
 7. Задаем учетную запись пользователя GIT
@@ -108,3 +108,4 @@ git add .
 git commit
 git push
 ```
+12. 

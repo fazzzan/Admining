@@ -3,6 +3,14 @@ https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-za
 1. Закачиваем server LTS Ubuntu 20 (Focal Fossa)
 2. Устанавливаем, вручную конфигурируя IF. Сначала я пробовал ставить 2 IF, но после ряда ошибок решил ставить сначала IF/NAT и затем после установки и обновок, добавить IF2/Inside, чтобы иметь следующую цепочку:
 VMNet8(NAT)<->ens33|Ubuntu|ens34<->VMNet1<->CLOUD<->GNS3 Labs
+
+В свойствах VM дописываем (https://www.suse.com/support/kb/doc/?id=000016951):
+```
+Add the following to the *.vmx file for the virtual machine:
+disk.EnableUUID = "TRUE"
+Restart the vm machine and the /dev/disk/by-id/scsi**** should be visible. 
+```
+
 3. После установки проверяем ```ip a``` (Конфиг интерфейсов); ```ip route show``` (таблица маршрутизации);```ls /etc/netplan/``` (Что там за конфиг IF - main netplan configuration file ); 
 ```
 fedor@s-admin:/etc/netplan$ ip a
