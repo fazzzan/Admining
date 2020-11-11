@@ -56,9 +56,9 @@ user-interface vty 0 4
 
 Настройки NPS:
 1. Регистрируем Switch
-![](PICTURESS/NPS0.jpg)
+![](PICTURES/NPS0.jpg)
 2. Настраиваем Policy
-![](PICTURESS/NPS1.jpg)
-![](PICTURESS/NPS2.jpg)
-![](PICTURESS/NPS3.jpg)
-![](PICTURESS/NPS4.jpg)
+![](PICTURES/NPS1.jpg)
+![](PICTURES/NPS2.jpg)
+![](PICTURES/NPS3.jpg)
+![](PICTURES/NPS4.jpg)
