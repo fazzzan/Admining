@@ -53,3 +53,12 @@ user-interface vty 0 4
  user privilege level 15
  protocol inbound all
 ```
+
+Настройки NPS:
+1. Регистрируем Switch
+![](PICTURESS/NPS0.jpg)
+2. Настраиваем Policy
+![](PICTURESS/NPS1.jpg)
+![](PICTURESS/NPS2.jpg)
+![](PICTURESS/NPS3.jpg)
+![](PICTURESS/NPS4.jpg)
