@@ -1,7 +1,8 @@
 # Module2/Lesson2 - Managing volumes in Windows Server
+
 ```
 diskpart
-List disk 
+List disk
 Select disk 3 
 Online disk - если он offline
 Attributes disk clear readonly - Если возникает ошибка Disk Readonly

@@ -1,7 +1,9 @@
-#Настройки AAA
+# Настройки AAA
+
 на SW
 Настройки
 Добавление локальных пользователей:
+
 ```
 local-user admin password irreversible-cipher <SECRET_ADMIN_PASSWORD>
  local-user admin privilege level 15
