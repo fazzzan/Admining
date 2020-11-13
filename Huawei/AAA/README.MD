@@ -24,30 +24,45 @@ ssh user netadmin service-type all
 ```
 aaa
  authentication-scheme default
+  authentication-mode local
+ authentication-scheme <YOUR_SCHEME>
+  authentication-mode local radius
  authentication-scheme radius
   authentication-mode radius
- authentication-scheme <AUTH>
-  authentication-mode local radius
  authorization-scheme default
+  authorization-mode local
  accounting-scheme default
+  accounting-mode none
+ accounting-scheme <YOUR_SCHEME>
+  accounting-mode radius
+  accounting start-fail online
  local-aaa-user password policy administrator
   password expire 0
  domain default
   authentication-scheme default
+  accounting-scheme default
   radius-server default
  domain default_admin
-  authentication-scheme <AUTH>
-  authorization-scheme default
-  radius-server <TEMPLATE_RADIUS>
+  authentication-scheme <YOUR_SCHEME>
+  accounting-scheme default
+  radius-server default
  domain <DOMAIN_NAME>
-  authentication-scheme <AUTH>
+  authentication-scheme <YOUR_SCHEME>
+  accounting-scheme <YOUR_SCHEME>
   radius-server <TEMPLATE_RADIUS>
 ...
+ 
 ...
+radius-server template default
+ undo radius-server user-name domain-included
+
 radius-server template <TEMPLATE_RADIUS>
  radius-server shared-key cipher <Pa55w0rd>
- radius-server authentication <NPS_IP_ADDR> 1812 weight 80
- undo radius-server user-name domain-included
+ radius-server authentication <NPS_IP_ADDR> 1812 source ip-address 10.96.20.32 weight 80
+ radius-server accounting <NPS_IP_ADDR> 1813 weight 80
+ radius-server retransmit 2
+ radius-attribute nas-ip 10.96.20.32
+ radius-server user-name domain-included
 radius-server authorization <NPS_IP_ADDR> shared-key cipher <Pa55w0rd2>
 ...
 user-interface vty 0 4
