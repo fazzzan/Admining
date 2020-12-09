@@ -1,19 +1,3 @@
 # FILESERVER
-Проверка каталога с профилями пользователей
-```
-Import-Module ActiveDirectory
-
-#$Path = "D:\Уволенные"
-$Path = "\\s-dat-03\d$\Personal"
-$LogPath = "c:\Temp"
-foreach ($pathin in Get-ChildItem -Path $Path)
-{    
-    $ExistingADUser = Get-ADUser -Filter "SamAccountName -eq '$pathin'"
-    if($null -eq $ExistingADUser){
-        write-host "'$pathin' SamAccountName '$pathin' does not exist in active directory" 
-    }
-}
-    
-# проверка овнера каталога
-# Get-ChildItem $Path -force | Select Name,Directory,@{Name="Owner";Expression={(Get-ACL $_.Fullname).Owner}},CreationTime,LastAccessTime | Export-Csv $LogPath\FileFolderOwner.txt -NoTypeInformation
-```
+1. Сверка аккаунтов и папки с профилями, выдает списком те профиля, которым не найдены пользователи в AD
+https://github.com/fazzzan/Admining/blob/master/PowerShell/SCRIPTS/check_existens_user_in_AD_by_PROFILENAME.ps1
