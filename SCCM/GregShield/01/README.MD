@@ -28,7 +28,7 @@ Win10: Mydesktop, UserDesktop, Packager (для снапшотов)
 xxx - NAT сеть
 
 DC: 192.168.3.100, ConfigMGR: 192.168.3.150; File1: 192.168.3.160
-Mydesktop: 192.168.3.99; Userdesktop: dhcp; Packasger: dhcp
+Mydesktop: 192.168.3.99; Userdesktop: dhcp; Packager: dhcp
 
 Internal AD domain: company.pri
 External AD domain companydotpri.com
@@ -44,6 +44,15 @@ default Domain Policy
    - Конфигурация компьютера;
     - Политики -> Административные шаблоны -> Сеть -> Сетевые подключения -> Брандмауэр Windows -> Профиль домена -> - Брандмауэр Windows: Защита всех сетевых подключений -> Отключено
 ```   
+Предоставление входа по RDP: GPO для спец OU с серверами
+
+```
+1. Computer Config > Windows Settings > Security Settings > Local Policies > User Rights Assignments > Allow logon through Remote Desktop Services
+2. Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> Remote Desktop Services -> Remote Desktop Session Host -> Connections -> Allow users to connect remotely by using Remote Desktop Services: Enable
+3. ??? не обязательно: Computer Configuration -> Policies -> Administrative Templates -> Windows Components -> Remote Desktop Services -> Remote Desktop Session Host -> Security -> Set Require user authentication for remote connections by using Network Level Authentication: Enable.
+```
+Почитать позже про настройку RDP по сертификату: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn781533(v=ws.11)
+
 3. DC: DNS, DHCP, ADDS
    - Ставим ADDS, затем promotion to DC и настраиваем DNS:
    - level Server 2012 R2
@@ -73,6 +82,54 @@ default Domain Policy
      - workstation authentication with private key template - для выгрузки private key
 
 ![](./pictures/07.jpg)
+
+Настройки сертификатов заключаются в следующем:
+   - конслоь CA->Manage Templates->ПКМ Manage
+
+2 template, которые нужно продублировать - Duplicate Template
+
+![](./pictures/10.jpg)
+
+При редактировании всех шаблонов, важно:
+   - SubjectName строить из информации AD, например ```DNS Names``` (FQDN)
+   - Security: 
+
+![](./pictures/11.jpg)
+
+При редактировании шаблонов для экспортируемых ключей, важно:
+ 
+![](./pictures/12.jpg) 
+
+при редактировании шаблонов для Workstation, важно:
+
+![](./pictures/13.jpg) 
+
+После настройки templates, делаем их доступными для issue/использования:
+
+![](./pictures/14.jpg) 
+
+и...Это еще не все...А видео , мать их, сняли гораздо больше...
+
+Надо на DC запросить новый сертификат для ConfigMGR? так как для серверов autoenrollment - нетути:
+   - Active Directory Enrollment policy -> SCCM web Server
+
+Распространение certificate по ПК домена - enrollment. AutoEnrollment делают обычно при помощи policy:
+   - Создаем OU для Desktops
+   - Создаем OU для Servers
+   - Создаем новую GPO, специально для Desktops ```Enroll SCCM Workstation Authentication Certificate: Computer->Policies->Windows->Security->Public Key Policies->"Certificate Services Client - Auto-Enrollment": ``` ___ENABLED___
+
+![](./pictures/09.jpg)   
+
+После перезагрузки - тачки из этого OU автоматически обратятся за сертом, сгенеренным на основании серта из п.п. 5.
+
+Чтобы тачки автоматически попадали в нужный OU - используем команду ```redircmp "OU=01.DESKTOP,dc=company,вс=pri"```
+```
+   - Redircmp - Перенаправляет контейнер по умолчанию для вновь созданных компьютеров в указанную целевую организационную единицу (OU), чтобы вновь созданные объекты компьютеров создавались в определенной целевой OU, а не в CN=Computers.
+
+   - Redirusr - Перенаправляет контейнер по умолчанию для вновь созданных пользователей в указанную целевую организационную единицу (OU), чтобы вновь созданные пользовательские объекты создавались в определенной целевой OU, а не в CN=Users.
+```
+Взято отсюда: http://pyatilistnik.org/redircmp-and-redirusr-will-keep-the-default-container-in-ad/
+И там же описано как посмотреть какие контейнеры имеют значения по умолчанию...
 
 4. ConfigMGR: SQL server 2016+SRSS; WSUS
 
