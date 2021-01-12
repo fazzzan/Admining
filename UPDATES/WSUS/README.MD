@@ -51,4 +51,4 @@ WHILE @@FETCH_STATUS = 0
         FETCH NEXT FROM fragmented INTO @tableName;  
     END;
 ```
-5. Запускаем WSUS, производим очистку компонень системы
+5. Запускаем WSUS, производим очистку компонентов системы
