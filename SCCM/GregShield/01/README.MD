@@ -53,6 +53,9 @@ default Domain Policy
 ```
 Почитать позже про настройку RDP по сертификату: https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-r2-and-2012/dn781533(v=ws.11)
 
+Также почитать материал по NTP: https://winitpro.ru/index.php/2017/01/06/nastrojka-sinxronizacii-vremeni-po-ntp-s-pomoshhyu-gruppovyx-politik/
+
+
 3. DC: DNS, DHCP, ADDS
    - Ставим ADDS, затем promotion to DC и настраиваем DNS:
    - level Server 2012 R2
