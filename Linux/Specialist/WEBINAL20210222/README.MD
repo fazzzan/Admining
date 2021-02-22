@@ -51,3 +51,6 @@ Linux = ядро + GNU/
 cisco network academy - ngd linux essentials 2.0 (экзамен 010-160)
 
 ![](pictures/04.jpg)
+
+- su - надо знать пароль root
+- sudo - запуск действий с суперадминскими правами, с запросом пароля.
