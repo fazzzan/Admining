@@ -1,0 +1,22 @@
+127.0.0.1	localhost
+127.0.1.1	admin-UB01
+192.168.1.105   admin-UB01
+192.168.10.11   R1
+192.168.10.12   R2
+192.168.10.13   R3
+192.168.10.14   R4
+192.168.10.15   R5
+192.168.10.16   R6
+192.168.10.17   R7
+192.168.10.18   R8
+192.168.1.18    ansible1
+192.168.1.26    ansible2
+192.168.1.22    ansible3
+192.168.1.25    server2019
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters

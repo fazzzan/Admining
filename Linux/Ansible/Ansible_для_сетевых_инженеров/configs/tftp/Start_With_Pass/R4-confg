@@ -1,0 +1,28 @@
+hostname R4
+ip domain-name test.local
+no ip http server
+no ip http secure-server
+no aaa new-model
+service password-encryption
+enable secret P@ssw0rd
+int Ethernet0/3
+ip address 192.168.10.14 255.255.255.0
+description ### MGM ###
+no shutdown
+int loopback 0
+ip address 11.11.11.14 255.255.255.255
+
+line console 0
+password P@ssw0rd
+login
+exec-timeout 5 30
+
+line vty 0 4
+exec-timeout 10
+logging synchronous
+password P@ssw0rd
+history size 100
+login
+transport input all
+
+do copy run start

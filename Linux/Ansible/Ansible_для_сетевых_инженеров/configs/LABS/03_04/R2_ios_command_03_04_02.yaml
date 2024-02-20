@@ -1,0 +1,97 @@
+---
+- name: Configure R2
+  hosts: R2
+  
+  tasks:
+  
+    - name: Configure login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: |
+          this is my login banner
+          that contains a multiline
+          string
+        state: present
+
+    - name: Add the motd banner
+      cisco.ios.ios_banner:
+        banner: motd
+        text: RESTRICTED ACCES ONLY
+        state: present
+
+    - name: username Security
+      ios_config:
+        lines:
+          - security passwords min-length 10
+          - enable algorithm-type scrypt secret P@ssw0rd_2023
+          - username admin privilege 15 algorithm-type scrypt secret P@ssw0rd
+          - service password-encryption     
+          - service timestamps debug datetime msec
+          - service timestamps log datetime msec      
+          - login on-success log 
+          - login on-failure log
+          
+
+    - name: enable NTP
+      ios_config:
+        lines:
+          - clock timezone MSK +3        
+          - ntp server 10.89.0.2     
+          - ntp update-calendar          
+
+    - name: enable SNMP
+      ios_config:
+        lines:
+          - snmp-server community public RO          
+
+  
+    - name: default int e0/0_e0/1
+      ios_config:
+        lines:
+          - default interface ethernet 0/0
+          - default interface ethernet 0/1
+          - default interface ethernet 0/2  
+          - default interface loopback 0 
+        
+         
+    - name: configure e0/0
+      ios_config:
+        parents:
+          - interface ethernet 0/0
+        lines: 
+          - ip address 172.16.0.2 255.255.255.240
+          - no shutdown
+          
+    - name: configure e0/1
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines:
+          - ip address 10.93.1.1 255.255.255.240
+          - no shutdown  
+
+    - name: configure e0/2
+      ios_config:
+        parents:
+          - interface ethernet 0/2
+        lines:
+          - ip address 10.93.1.17 255.255.255.240
+          - no shutdown  
+
+          
+    - name: configure R2 e0/3
+      ios_config:
+        parents:
+          - interface ethernet 0/3
+        lines:
+          - no cdp enable
+
+    - name: configure R2 lo0
+      ios_config:
+        parents:
+          - interface loopback0
+        lines:
+          - ip address 10.95.1.2 255.255.255.255
+          - no shutdown
+          
+...

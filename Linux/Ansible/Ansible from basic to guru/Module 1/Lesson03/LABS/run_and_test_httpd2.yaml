@@ -1,0 +1,13 @@
+---
+- name: check httpd on redos
+  gather_facts: false
+  hosts: redos
+  tasks:
+  - name: get installed apache
+    ansible.builtin.shell: rpm -qa | grep httpd
+- name: check httpd on ubuntu
+  gather_facts: false
+  hosts: ubuntu
+  tasks:
+  - name: get installed apache
+    ansible.builtin.shell: dpkg -l | grep apache

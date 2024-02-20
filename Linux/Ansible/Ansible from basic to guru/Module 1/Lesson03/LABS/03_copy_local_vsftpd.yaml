@@ -1,0 +1,41 @@
+---
+- name: copy config file vsftpd local redos
+  hosts: redos 
+  gather_facts: false
+  tasks:
+  - name: copy from redos
+    copy:
+      src: /etc/ansible/ansiblecvc/basics/vsftpd.conf 
+      dest: /etc/vsftpd/vsftpd.conf
+      backup: yes
+
+- name: copy config file vsftpd local ubuntu
+  hosts: ubuntu
+  gather_facts: false
+  tasks:
+  - name: copy from ubuntu
+    copy:
+      src: /etc/ansible/ansiblecvc/basics/vsftpd.conf 
+      dest: /etc/vsftpd.conf
+      backup: yes
+      
+- name: restart vsftpd
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: start and enable service
+    service:
+      name: vsftpd
+      state: restarted 
+
+- name: status vsftpd
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: check service
+    command:
+      cmd: service vsftpd status     
+    register: vsftpd_status
+
+  - name: Debug registered var
+    debug: var=vsftpd_status.stdout_lines

@@ -1,0 +1,13 @@
+---
+- name: Configure R4
+  hosts: R4
+  
+  tasks:
+  
+    - name: configure R4 lo0
+      ios_config:
+        parents:
+          - interface loopback0
+        lines: 
+          - no shutdown         
+...

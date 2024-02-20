@@ -1,0 +1,13 @@
+[ansible4]
+server2019 
+
+[windows:children]
+ansible4
+
+[windows:vars]
+ansible_user: ansible
+ansible_password: P@55w0rd
+ansible_port: 5986
+ansible_connection: winrm
+ansible_winrm_server_cert_validation: ignore
+

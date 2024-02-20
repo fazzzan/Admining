@@ -1,0 +1,13 @@
+---
+- name: check vsftpd on redos
+  gather_facts: false
+  hosts: redos
+  tasks:
+  - name: get installed vsftpd
+    ansible.builtin.shell: rpm -qa | grep vsftpd
+- name: check vsftpd on ubuntu
+  gather_facts: false
+  hosts: ubuntu
+  tasks:
+  - name: get installed vsftpd
+    ansible.builtin.shell: dpkg -l | grep vsftpd

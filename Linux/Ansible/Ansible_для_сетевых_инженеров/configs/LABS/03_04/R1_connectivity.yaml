@@ -1,0 +1,47 @@
+---
+- name: Connectivity of R1 to everyone
+  hosts: R1
+  
+  tasks:
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.93.1.2
+        source: loopback0
+      register: show_result1
+
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.95.1.5
+      register: show_result2
+
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.89.1.1
+      register: show_result3
+
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.89.1.17
+      register: show_result4
+
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.89.1.33        
+      register: show_result5
+
+    - name: TestPing of R4
+      cisco.ios.ios_ping:
+        dest: 10.89.1.49        
+      register: show_result6
+
+    - name: Debug registered var
+      debug: 
+        msg:
+          10.93.1.2: "{{ show_result1.packet_loss }}"          
+          10.95.1.5: "{{ show_result2.packet_loss }}"
+          10.89.1.1: "{{ show_result3.packet_loss }}"
+          10.89.1.17: "{{ show_result4.packet_loss }}"
+          10.89.1.33: "{{ show_result5.packet_loss }}"
+          10.89.1.49: "{{ show_result6.packet_loss }}"
+
+...

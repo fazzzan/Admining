@@ -1,0 +1,11 @@
+- name: Run cfg routers
+  hosts: cisco_devices
+  
+  tasks:
+  - name: set vty transport ssh
+    ios_config:
+      parents:
+        - line vty 0 4
+      lines:
+        - login local
+        - transport input ssh

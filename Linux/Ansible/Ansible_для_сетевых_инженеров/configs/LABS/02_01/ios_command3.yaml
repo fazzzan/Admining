@@ -1,0 +1,177 @@
+---
+- name: Running commands on ALL R[1..7] 
+  hosts: cisco_devices
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW IP INT BR 
+      ios_command:
+        commands:
+          - "{{shipintbr}}"
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+    - name: Run SHOW IP ARP 
+      ios_command:
+        commands:
+          - "{{shiparp}}"
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+
+    - name: Run SHOW IP ROUTE 
+      ios_command:
+        commands:
+          - "{{shiproute}}"
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+- name: Running command on R1 
+  hosts: R1
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+    
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+      
+- name: Running command on R2 
+  hosts: R2
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+- name: Running command on R3 
+  hosts: R3
+  gather_facts: false
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+    
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+- name: Running command on R4 
+  hosts: R4
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+
+- name: Running command on R5 
+  hosts: R5
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+
+- name: Running command on R6 
+  hosts: R6
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+
+- name: Running command on R7 
+  hosts: R7
+  gather_facts: false
+
+  vars:
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+
+  tasks:
+    - name: Run SHOW CLOCK 
+      ios_command:
+        commands:
+          - show clock
+
+      register: print_output
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+
+
+...

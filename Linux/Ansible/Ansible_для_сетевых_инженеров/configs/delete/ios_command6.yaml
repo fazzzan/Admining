@@ -1,0 +1,23 @@
+---
+- name: SECOND PLAYBOOK
+  hosts: cisco_devices
+
+  tasks:
+    - name: sho ip route
+      ios_command:
+        commands:
+          - sho ip route
+
+      register: VAR_shoiproute
+
+    - name: sho ip int br FOR up IF
+      ios_command:
+        commands: 
+          - sho ip int br | in up
+
+      register: VAR_shoipintbr
+
+    - debug: var=VAR_shoiproute.stdout_lines
+
+    - debug: var=VAR_shoipintbr.stdout_lines
+...

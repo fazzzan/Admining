@@ -1,0 +1,29 @@
+---
+- name: YAMLPB_03_03_02
+  hosts: cisco_devices
+  connection: network_cli
+  
+  vars:
+    shrun: show run
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+    shruninte03: show run int eth 0/3
+    shiproute: show ip route
+    shversion: show version
+    
+  tasks:
+    - name: show run
+      ios_command:  
+        commands:  
+          - "{{shrun}}"
+          - "{{shiproute}}"
+          - "{{shversion}}"
+        
+      register: config
+
+    - name: save output to local directory
+      copy:
+        content: "{{ config.stdout | replace('\\n', '\n') }}"
+        dest: "all_facts/{{ inventory_hostname }}.ios"
+...

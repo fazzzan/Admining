@@ -1,0 +1,51 @@
+---
+- name: YAMLPB03_04_01
+  hosts: cisco_devices
+
+  vars:
+    shipintbr: show ip int br | exc unass # Алиас команды для дальнейшего использования
+    shiparp: show ip arp # Алиас команды для дальнейшего использования
+    shiproute: show ip route | be % - next hop override # Алиас команды для дальнейшего использования
+    shruninte03: show run int eth 0/3 # Алиас команды для дальнейшего использования
+    shintdescr: show int desc | exc down  # Алиас команды для дальнейшего использования
+    shruninciproute: show run | in ip route # Алиас команды для дальнейшего использования
+  
+  tasks:
+    - name: PB03_04_01_00
+      ios_command:
+        commands: show run | in passw
+
+      register: VAR_shoconfig
+
+    - name: Print config        
+      debug: var=VAR_shoconfig
+
+- name: YAMLPB03_04_01_02
+  hosts: cisco_devices
+  
+  tasks:
+
+    - name: Disable Sevice Pass encryption
+      ios_config:
+        lines:
+#          - no service password-encryption
+          - service password-encryption
+          - username admin privilege 15 password P@ssw0rd
+          - no ip http server
+          - no ip http secure-server
+          - no ip domain lookup
+        
+- name: YAMLPB03_04_01_03
+  hosts: cisco_devices
+  
+  tasks:
+    - name: PB03_04_01_01
+      ios_command:
+        commands: show run | in passw
+
+      register: VAR_shoconfig    
+
+    - name: Print config2               
+      debug: var=VAR_shoconfig                        
+
+...

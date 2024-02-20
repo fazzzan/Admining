@@ -1,0 +1,10 @@
+---
+- name: Run cfg commands on routers
+  hosts: cisco_devices
+
+  tasks:
+    - name: Disable CDP
+      ios_config:
+        lines:
+          - cdp run
+...

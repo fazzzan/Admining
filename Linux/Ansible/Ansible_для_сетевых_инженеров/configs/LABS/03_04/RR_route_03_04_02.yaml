@@ -1,0 +1,9 @@
+---
+- import_playbook: R1_route.yaml
+- import_playbook: R2_route.yaml
+- import_playbook: R3_route.yaml
+- import_playbook: R4_route.yaml
+- import_playbook: R5_route.yaml
+- import_playbook: R6_route.yaml
+- import_playbook: R7_route.yaml
+...

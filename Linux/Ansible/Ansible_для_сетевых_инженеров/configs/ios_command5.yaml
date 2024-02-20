@@ -1,0 +1,17 @@
+---
+- name: FIRST PLAYBOOK
+  hosts: cisco_routers245:cisco_routers367
+  gather_facts: false
+  
+  tasks:
+    - name: FIRST TASK of PLAYBOOK
+      ios_command
+        commands:
+          - show clock
+          - show ver | in uptime
+          - sho ip int br | in up
+      register: first_task
+      
+    - name: print output
+      debug: var=first_task.stdout_lines
+...

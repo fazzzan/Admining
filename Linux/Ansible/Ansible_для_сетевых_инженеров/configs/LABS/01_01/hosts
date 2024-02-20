@@ -1,0 +1,6 @@
+R1.test.local
+R8.test.local
+
+[cisco_routers]
+192.168.10.11
+192.168.10.18

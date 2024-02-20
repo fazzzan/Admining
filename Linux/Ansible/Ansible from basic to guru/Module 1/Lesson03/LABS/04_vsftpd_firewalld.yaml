@@ -1,0 +1,12 @@
+---
+- name: status firewalld
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: check service
+    command:
+      cmd: systemctl status firewalld    
+    register: firewalld_status
+
+  - name: Debug registered var
+    debug: var=firewalld_status.stdout_lines

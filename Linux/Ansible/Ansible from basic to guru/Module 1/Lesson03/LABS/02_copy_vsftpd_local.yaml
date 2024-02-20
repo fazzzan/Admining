@@ -1,0 +1,19 @@
+---
+- name: copy config file vsftpd local redos
+  hosts: redos 
+  tasks:
+  - name: copy from redos
+    fetch:
+      src: /etc/vsftpd/vsftpd.conf
+      dest: /etc/ansible/ansiblecvc/basics/vsftpd_{{ ansible_hostname }}.conf 
+      flat: yes
+
+- name: copy config file vsftpd local ubuntu
+  hosts: ubuntu
+  tasks:
+  - name: copy from ubuntu
+    fetch:
+      src: /etc/vsftpd.conf
+      dest: /etc/ansible/ansiblecvc/basics/vsftpd_{{ ansible_hostname }}.conf
+      flat: yes
+      

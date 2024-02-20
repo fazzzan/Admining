@@ -1,0 +1,16 @@
+--- 
+- name: PB_to configure route
+  hosts: R3  
+
+  tasks:
+    - name: configure static route R3
+      ios_config:
+        lines:
+          - no ip route 10.89.1.0 255.255.255.128 10.93.1.2
+          - ip route 0.0.0.0 0.0.0.0 172.16.0.17
+          - ip route 10.95.2.6 255.255.255.255 10.93.2.2          
+          - ip route 10.95.2.7 255.255.255.255 10.93.2.18                              
+          - ip route 10.89.2.0 255.255.255.192 10.93.2.2          
+          - no ip route 10.89.2.64 255.255.255.192 10.93.2.17                   
+          - ip route 10.89.2.64 255.255.255.192 10.93.2.18
+...

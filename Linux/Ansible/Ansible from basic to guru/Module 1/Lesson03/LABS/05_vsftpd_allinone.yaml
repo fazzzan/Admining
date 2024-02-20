@@ -1,0 +1,127 @@
+---
+- name: Deploy VSFTP and Web Server redos
+  hosts: redos 
+  gather_facts: false
+  become: true
+  tasks:
+  - block:
+    - name: Install FTP package on RHEL
+      ansible.builtin.package:
+        name: vsftpd
+        state: present
+  - block:
+    - name: Modify FTP configuation
+      lineinfile:
+        dest: /etc/vsftpd/vsftpd.conf
+        backup: yes
+        state: present
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - regexp: anonymous_enable=NO
+          line: anonymous_enable=YES
+        - regexp: anon_upload_enable
+          line: anon_upload_enable=YES
+        - regexp: anon_mkdir_write_enable
+          line: anon_mkdir_write_enable=YES
+        - regexp: listen=NO
+          line: listen=YES
+        - regexp: listen_ipv6=YES
+          line: listen_ipv6=NO
+        - regexp: local_enable=NO
+          line: local_enable=YES
+        - regexp: pam_service_name
+          line: pam_service_name=vsftpd
+        - regexp: write_enable=NO
+          line: write_enable=YES
+        - regexp: anon_root
+          line: anon_root=/var/ftp
+        - regexp: no_anon_password=NO
+          line: no_anon_password=YES
+  - block:
+    - name: Start FTP service
+      become: yes
+      service: name=vsftpd state=restarted enabled=yes
+
+- name: Deploy VSFTP and Web Server ubuntu
+  hosts: ubuntu
+  gather_facts: false
+  become: true
+  tasks:
+  - block:
+    - name: create dir
+      ansible.builtin.shell:
+        cmd: mkdir -p /var/ftp/pub
+  - block:
+    - name: Install FTP package on RHEL
+      ansible.builtin.package:
+        name: vsftpd
+        state: present
+  - block:
+    - name: Modify FTP configuation
+      lineinfile:
+        dest: /etc/vsftpd.conf
+        backup: yes
+        state: present
+        regexp: "{{ item.regexp }}"
+        line: "{{ item.line }}"
+      with_items:
+        - regexp: anonymous_enable=NO
+          line: anonymous_enable=YES
+        - regexp: anon_upload_enable
+          line: anon_upload_enable=YES
+        - regexp: anon_mkdir_write_enable
+          line: anon_mkdir_write_enable=YES
+        - regexp: listen=NO
+          line: listen=YES
+        - regexp: listen_ipv6=YES
+          line: listen_ipv6=NO
+        - regexp: local_enable=NO
+          line: local_enable=YES
+        - regexp: pam_service_name
+          line: pam_service_name=vsftpd
+        - regexp: write_enable=NO
+          line: write_enable=YES
+        - regexp: anon_root
+          line: anon_root=/var/ftp
+        - regexp: no_anon_password=NO
+          line: no_anon_password=YES
+  - block:
+    - name: Start FTP service
+      become: yes
+      service: name=vsftpd state=restarted enabled=yes
+
+
+- name: change chmod
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: change chmod
+    shell: |
+      chmod 777 /var/ftp/pub
+
+- name: change selinux
+  hosts: redos
+  gather_facts: false
+  tasks:
+  - name: change selinux
+    shell: |
+      setsebool -P ftpd_anon_write 1
+      setsebool -P ftpd_full_access 1    
+      getsebool -a | grep ftp      
+    register: sebool_ftp_status
+
+  - name: Debug registered var
+    debug: var=sebool_ftp_status     
+
+- name: status vsftpd
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: check service
+    command:
+      cmd: service vsftpd status     
+    register: vsftpd_status
+
+  - name: Debug registered var
+    debug: var=vsftpd_status.stdout_lines          

@@ -1,0 +1,68 @@
+---
+- name: YAMLPB1 # Зачем нужен этот первый PB
+  hosts: cisco_devices
+  
+  vars:
+    shipintbr: show ip int br | exc unass # Алиас команды для дальнейшего использования
+    shiparp: show ip arp # Алиас команды для дальнейшего использования
+    shiproute: show ip route | be % - next hop override # Алиас команды для дальнейшего использования
+    shruninte03: show run int eth 0/3 # Алиас команды для дальнейшего использования
+    shintdescr: show int desc | exc down  # Алиас команды для дальнейшего использования
+    shruninciproute: show run | in ip route # Алиас команды для дальнейшего использования
+  
+  tasks:
+    - name: PB1_GET UP IP BR 
+      ios_command:
+        commands:
+          - "{{shipintbr}}"
+          - "{{shintdescr}}"
+          
+      register: VAR_shoipintbr
+
+    -  debug: var=VAR_shoipintbr.stdout_lines    
+       
+ 
+- name: YAMLPB2
+  hosts: cisco_routers367
+
+  vars:
+    shipintbr: show ip int br | exc unass # Алиас команды для дальнейшего использования
+    shiparp: show ip arp # Алиас команды для дальнейшего использования
+    shiproute: show ip route | be % - next hop override # Алиас команды для дальнейшего использования
+    shruninte03: show run int eth 0/3 # Алиас команды для дальнейшего использования
+    shintdescr: show int desc | exc down  # Алиас команды для дальнейшего использования
+    shruninciproute: show run | in ip route # Алиас команды для дальнейшего использования
+  
+  tasks:
+    - name: PB2_SHO IP ROUTE
+      ios_command:
+        commands:
+          - "{{shiproute}}"
+      register: VAR_shoiproute
+
+    - debug: var=VAR_shoiproute.stdout_lines          
+
+
+- name: YAMLPB3
+  hosts: cisco_routers367
+
+  vars:
+    shipintbr: show ip int br | exc unass # Алиас команды для дальнейшего использования
+    shiparp: show ip arp # Алиас команды для дальнейшего использования
+    shiproute: show ip route | be % - next hop override # Алиас команды для дальнейшего использования
+    shruninte03: show run int eth 0/3 # Алиас команды для дальнейшего использования
+    shintdescr: show int desc | exc down  # Алиас команды для дальнейшего использования
+    shruninciproute: show run | in ip route # Алиас команды для дальнейшего использования
+  
+  tasks:
+    - name: PB2_SHO IP ROUTE in CONFIG
+      ios_facts:  
+        gather_subset: all  
+
+      register: VAR_shoiproute2
+
+    - name: Copy facts to files
+      copy:
+        content: "{{ VAR_shoiproute2 | to_nice_json }}"
+        dest: "all_facts/{{inventory_hostname}}_facts.json"
+...

@@ -1,0 +1,9 @@
+---
+- import_playbook: R1_connectivity_v2.yaml
+- import_playbook: R2_connectivity_v2.yaml
+- import_playbook: R3_connectivity_v2.yaml
+- import_playbook: R4_connectivity_v2.yaml
+- import_playbook: R5_connectivity_v2.yaml
+- import_playbook: R6_connectivity_v2.yaml
+- import_playbook: R7_connectivity_v2.yaml
+...

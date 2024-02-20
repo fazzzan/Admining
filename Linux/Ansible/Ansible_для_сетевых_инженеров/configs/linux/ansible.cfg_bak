@@ -1,0 +1,12 @@
+[defaults]
+inventory = ./inventory
+remote_user = ansible
+ask_pass = False
+gathering = explicit
+host_key_checking=False
+
+[privelege_escalation]
+become = True
+become_method = sudo
+become_user = ansible
+become_ask_password = False

@@ -1,0 +1,134 @@
+---
+- name: Configure R6
+  hosts: R6
+  
+  tasks:
+  
+    - name: Configure login banner
+      cisco.ios.ios_banner:
+        banner: login
+        text: |
+          this is my login banner
+          that contains a multiline
+          string
+        state: present
+
+    - name: Add the motd banner
+      cisco.ios.ios_banner:
+        banner: motd
+        text: RESTRICTED ACCES ONLY
+        state: present
+
+    - name: username Security
+      ios_config:
+        lines:
+          - security passwords min-length 10
+          - enable algorithm-type scrypt secret P@ssw0rd_2023
+          - username admin privilege 15 algorithm-type scrypt secret P@ssw0rd
+          - service password-encryption     
+          - service timestamps debug datetime msec
+          - service timestamps log datetime msec      
+          - login on-success log 
+          - login on-failure log
+          
+
+    - name: enable NTP
+      ios_config:
+        lines:
+          - clock timezone MSK +3        
+          - ntp server 10.89.0.2     
+          - ntp update-calendar          
+
+    - name: enable SNMP
+      ios_config:
+        lines:
+          - snmp-server community public RO          
+
+  
+    - name: default int e0/0_e0/1
+      ios_config:
+        lines:
+          - default interface ethernet 0/0
+          - default interface ethernet 0/1
+          - default interface ethernet 0/2  
+          - default interface loopback 0
+          
+    - name: configure e0/0
+      ios_config:
+        parents:
+          - interface ethernet 0/0
+        lines: 
+          - ip address 10.93.2.2 255.255.255.240
+          - no shutdown        
+          
+    - name: configure R6 e0/3
+      ios_config:
+        parents:
+          - interface ethernet 0/3
+        lines:
+          - no cdp enable
+
+    - name: configure R6 lo0
+      ios_config:
+        parents:
+          - interface loopback0
+        lines: 
+          - ip address 10.95.2.6 255.255.255.255
+          - no shutdown  
+
+    - name: configure R6 E0/1.821
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines: 
+          - interface Ethernet0/1.821
+          - encapsulation dot1Q 821
+          - ip address 10.89.2.1 255.255.255.240
+          - no shutdown  
+
+    - name: configure R6 E0/1.822
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines: 
+          - interface Ethernet0/1.822
+          - encapsulation dot1Q 822
+          - ip address 10.89.2.17 255.255.255.240
+          - no shutdown   
+
+    - name: configure R6 E0/1.823
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines: 
+          - interface Ethernet0/1.823
+          - encapsulation dot1Q 823
+          - ip address 10.89.2.33 255.255.255.240
+          - no shutdown   
+
+    - name: configure R6 E0/1.824
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines: 
+          - interface Ethernet0/1.824
+          - encapsulation dot1Q 824
+          - ip address 10.89.2.49 255.255.255.240
+          - no shutdown   
+
+    - name: configure R6 E0/1
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines: 
+          - no shutdown   
+
+          
+    - name: configure R6 e0/3
+      ios_config:
+        parents:
+          - interface ethernet 0/3
+        lines:
+          - no cdp enable
+            
+...

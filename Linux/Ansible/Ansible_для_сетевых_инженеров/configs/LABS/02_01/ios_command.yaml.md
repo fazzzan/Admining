@@ -1,0 +1,19 @@
+```
+---
+- name: Running show commands on Cisco IOS
+  hosts: cisco_routers
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: Run multiple commands on Cisco IOS XE nodes
+      ios_command:
+        commands:
+          - show ip int br | in Interface|up
+
+      register: print_output
+
+    - name: Debug registered var
+      debug: var=print_output.stdout_lines
+...
+```

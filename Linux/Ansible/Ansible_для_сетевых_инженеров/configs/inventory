@@ -1,0 +1,13 @@
+[redos]
+ansible3
+
+[ubuntu22]
+ansible2
+ansible1
+
+[ubuntu:children]
+ubuntu22
+
+[os:children]
+redos
+ubuntu

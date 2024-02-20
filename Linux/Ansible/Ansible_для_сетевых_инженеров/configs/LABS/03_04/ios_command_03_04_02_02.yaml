@@ -1,0 +1,36 @@
+---
+- name: Configure R1
+  hosts: R1
+  
+  tasks:
+  
+    - name: default int e0/0_e0/1
+      ios_config:
+        lines:
+          - default interface ethernet 0/0
+          - default interface ethernet 0/1
+          
+    - name: configure e0/0
+      ios_config:
+        parents:
+          - interface ethernet 0/0
+        lines: 
+          - ip address 172.16.0.1 255.255.255.240
+          - no shutdown
+          
+    - name: configure e0/1
+      ios_config:
+        parents:
+          - interface ethernet 0/1
+        lines:
+          - ip address 172.16.0.17 255.255.255.240
+          - no shutdown  
+          
+    - name: configure R1 e0/3
+      ios_config:
+        parents:
+          - interface ethernet 0/3
+        lines:
+          - no cdp enable
+          
+...

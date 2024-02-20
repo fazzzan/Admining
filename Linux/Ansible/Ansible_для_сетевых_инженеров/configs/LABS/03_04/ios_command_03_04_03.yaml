@@ -1,0 +1,21 @@
+---
+- name: YAMLPB03_04_01_02
+  hosts: cisco_devices
+  
+  tasks:
+
+    - name: Disable domain lookup
+      ios_config:
+        lines:
+#          - no service password-encryption
+#          - username admin privilege 15 password P@ssw0rd
+          - service password-encryption
+          - no ip http server
+          - no ip http secure-server
+          - no ip domain lookup
+      register: cfg
+
+    - name: Show config updates
+      debug: var=cfg.updates
+      when: cfg.changed
+...

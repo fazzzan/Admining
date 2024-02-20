@@ -1,0 +1,80 @@
+---
+- name: Connectivity of R5 to everyone
+  hosts: R5
+  
+  tasks:
+    - name: TestPing From R5 to all IF R2
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 172.16.0.2
+        - 10.95.1.2
+        - 10.93.1.1
+        - 10.93.1.17
+
+    - name: TestPing From R3 to all IF R4
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 10.93.1.2
+        - 10.95.1.4
+        - 10.89.1.1
+        - 10.89.1.17
+        - 10.89.1.33
+        - 10.89.1.49 
+
+    - name: TestPing From R5 to all IF R1
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 172.16.0.1
+        - 172.16.0.17
+        - 10.95.0.1
+        - 10.89.0.1
+
+    - name: TestPing From R5 to all IF R3
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 172.16.0.18
+        - 10.95.2.3
+        - 10.93.2.1
+        - 10.93.2.17
+
+    - name: TestPing From R5 to all IF R6
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 10.93.2.2
+        - 10.95.2.6
+        - 10.89.2.1
+        - 10.89.2.17
+        - 10.89.2.33
+        - 10.89.2.49 
+
+    - name: TestPing From R5 to all IF R7
+      cisco.ios.ios_ping:
+        dest: "{{ item }}"
+        source: loopback0 
+      loop:
+        - 10.93.2.18
+        - 10.95.2.7
+        - 10.89.2.65
+        - 10.89.2.81
+        - 10.89.2.97
+        - 10.89.2.113 
+
+    
+      register: show_result
+
+#    - name: Debug registered var
+#      debug: 
+#        msg: "R5 {{ item.item }} packet loss is {{ item.packet_loss }}"
+#      with_items: "{{ show_result.results }}"  
+
+...

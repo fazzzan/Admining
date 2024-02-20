@@ -1,0 +1,5 @@
+[routers]
+R[1..7]
+
+[routers:vars]
+ansible_network_os = ios

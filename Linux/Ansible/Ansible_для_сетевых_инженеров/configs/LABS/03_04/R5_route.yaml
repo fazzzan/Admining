@@ -1,0 +1,10 @@
+--- 
+- name: PB_to configure route
+  hosts: R5  
+
+  tasks:
+    - name: configure static route R5
+      ios_config:
+        lines:
+          - ip route 0.0.0.0 0.0.0.0 10.93.1.17
+...

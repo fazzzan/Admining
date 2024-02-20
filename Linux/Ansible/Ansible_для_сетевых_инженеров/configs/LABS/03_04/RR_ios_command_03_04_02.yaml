@@ -1,0 +1,9 @@
+---
+- import_playbook: R1_ios_command_03_04_02.yaml
+- import_playbook: R2_ios_command_03_04_02.yaml
+- import_playbook: R3_ios_command_03_04_02.yaml
+- import_playbook: R4_ios_command_03_04_02.yaml
+- import_playbook: R5_ios_command_03_04_02.yaml
+- import_playbook: R6_ios_command_03_04_02.yaml
+- import_playbook: R7_ios_command_03_04_02.yaml
+...

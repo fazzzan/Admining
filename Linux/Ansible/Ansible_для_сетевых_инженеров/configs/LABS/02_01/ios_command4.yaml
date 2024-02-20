@@ -1,0 +1,36 @@
+---
+- name: Running commands on ALL R[1..7] 
+  hosts: cisco_devices
+  gather_facts: false
+  connection: network_cli
+
+  vars:
+    inte03: Ethernet0/3
+    shipintbr: show ip int br
+    shiparp: show ip arp
+    shiproute: show ip route
+    shruninte03: show run int Ethernet0/3
+
+  tasks:
+    - name: set Ethernet0/3 description
+      ios_interfaces:
+        state: merged
+        config:
+          - {name: Ethernet0/3, description: "### MGM to ANSIBLE by ANSIBLE ###"}
+      register: print_output
+
+    - name: DEBUG >> print_output
+      debug:
+        msg: "{{ print_output }}"
+
+    - name: "Run shruninte03"
+      ios_command:
+        commands:
+          - "{{shruninte03}}"
+
+      register: print_output_shruninte03
+      
+    - name: Debug registered var
+      debug: var=print_output_shruninte03.stdout_lines
+
+...
