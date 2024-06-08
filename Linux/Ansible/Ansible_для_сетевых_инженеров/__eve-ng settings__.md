@@ -24,7 +24,7 @@ no ip http secure-server
 2. Обязательно делаем WR MEM  на роутере, после чего задаем загрузку Rxx из startup-конфиг EVE-NG 
 3. В схему EVE-NG вводим "сеть", из списка подключенных к EVE интерфейсов, на котором работает DHCP, чтобы при включении Rxx получал ip и мог выйти на связь с tftp
 ![](pictures/01.png)
-![](pictures/02.jpg)
+![](GIT/Admining/Linux/Ansible/Ansible_для_сетевых_инженеров/pictures/02.jpg)
 4.  Для установки tftp под UBUNTU
 ```
 apt install xinetd tftpd tftp

@@ -17,14 +17,14 @@ Linux = ядро + GNU/
 
 До графики использовался только CLI, но именно из CLI можно выполнять различные назначенные задания и циклы.
 
-![](pictures/01.jpg)
+![](GIT/Admining/Linux/Specialist/WEBINAR20210222/pictures/01.jpg)
 
 - shell - командная строка
 - bash - born again shell (переписанный, перерожденный shell)
 
 Подключение в bash - при помощи putty, через SSH. в итоге открывается командная строка. 
 
-![](pictures/02.jpg)
+![](GIT/Admining/Linux/Specialist/WEBINAR20210222/pictures/02.jpg)
 
 Чтобы узнать кто я - ```whoami```
 чтобы узнать где - ```pwd```
@@ -32,7 +32,7 @@ Linux = ядро + GNU/
 
 Все эти термины - в приглашении командной строки
 
-![](pictures/03.jpg)
+![](GIT/Admining/Linux/Specialist/WEBINAR20210222/pictures/03.jpg)
 
 
 Просмотр домашней папки - ```ls```, ```ls -l ``` или ```ls -lh ``` 
@@ -50,7 +50,7 @@ Linux = ядро + GNU/
 Подробнее о Linux - на курсе основы Linux 2.0 
 cisco network academy - ngd linux essentials 2.0 (экзамен 010-160)
 
-![](pictures/04.jpg)
+![](GIT/Admining/Linux/Specialist/WEBINAR20210222/pictures/04.jpg)
 
 - su - надо знать пароль root
 - sudo - запуск действий с суперадминскими правами, с запросом пароля.
