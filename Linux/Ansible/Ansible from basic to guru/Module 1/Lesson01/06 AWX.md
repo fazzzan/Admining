@@ -129,12 +129,13 @@ https://yallalabs.com/linux/how-to-install-ansible-awx-without-docker-centos-7-r
 ## Проблемы, с которыми столкнулся при настройке и смене сети:
 - AWX не развертывает имена из файла /etc/hosts на локальном хосте. Необходимо чтобы отвечал сторонний DNS - сервер
 - WINDOWS DNS сервер отвечает на запрос, только если в свойствах домена указан сконфигурированный scope
+![[Pasted image 20240301202236.png]]
 для REDOS, Centos9 (https://access.redhat.com/documentation/ru-ru/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/configuring-the-order-of-dns-servers_configuring-and-managing-networking) отредактировать DNS надо так:
 ```
 nmcli -p c
 sudo nmcli -p connection edit "Проводное подключение 1"
 nmcli> remove ipv4.dns
-nmcli> set ipv4.dns 192.168.48.10
+nmcli> set ipv4.dns 192.168.48.11
 nmcli> set ipv4.dns-search test.local
 nmcli> set ipv4.dns-priority 10
 nmcli> print

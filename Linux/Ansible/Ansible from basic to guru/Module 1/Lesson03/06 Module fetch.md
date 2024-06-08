@@ -1,3 +1,4 @@
+Copy remote file (host.example.com:/tmp/somefile) into folder /tmp/fetched/host.example.com/tmp/somefile on local machine
 ```yaml
 - hosts: host.example.com
   tasks:
