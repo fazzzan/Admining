@@ -3,7 +3,18 @@ https://learning.oreilly.com/live-events/ansible-in-4-hours/0636920123842/
 
 https://github.com/sandervanvugt/ansiblefundamentals
 
-При первичной настройке EVE-NG очень много времени потрачего на первоначальные конфигурации R1...R7. Основная задача: при загрузке Rxx должен брать первоначальный конфигурационный файл с tftp сервера. Алгоритм выстроен следующим образом:
+При первичной настройке EVE-NG очень много времени потрачено на:
+- [```D:\Soft\eve-ng\EVE-NG-Win-Client-Pack-2.0.exe```](https://mega.nz/file/G5liXYzK#oaSC1Jrh5m0HaNkReirurtrXhIHGw6NOZX3jgus1xqo)
+- подключение [SecureCRT](https://adminreboot.com/configure-eve-ng-to-use-securecrt-eve-ng-integrate-with-securecrt/): ```Open Firefox > Tools (☰) > Setting > Applications > Content Type **telnet** choose Action **Use SecureCRT Application**.```
+- При установке Linux на ВМ в EVE-NG, необходимо в каталог положить iso файл и строчку QEMU сконфигурировать так, чтобы ВМ грузилась с CD и поддерживала клавиатуру:
+```
+-machine type=pc-1.0,accel=kvm -vga std -usbdevice tablet -boot order=d -k en-us
+дефолтные настройки
+-machine type=pc-1.0,accel=kvm -vga std -usbdevice tablet -boot order=cd
+```
+- открытие [новой сессии во вкладке](https://adminreboot.com/securecrt-open-new-tab-instead-of-open-new-window/)
+![[Pasted image 20240716133259.png]]
+- первоначальные конфигурации R1...R7. Основная задача: при загрузке Rxx должен брать первоначальный конфигурационный файл с tftp сервера. Алгоритм выстроен следующим образом:
 1. Базовые настройки Rxx сохраняем и выгружаем в startup-конфиг EVE-NG, чтобы при wipe устройства оно конфигурировалось в минимальном объеме, достаточном для скачиванивания конфига с tftp
 <details><summary>R1</summary>
     <pre>
